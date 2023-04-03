@@ -10,7 +10,7 @@ IMG_TAG=`date "+%Y%M%d_%H%M"`      #镜像标签，如 20201223_1351
 IMG_FULL_NAME="${IMG_REGISTRY}/${IMG_NAME}:${IMG_TAG}" #镜像上传与拉取的名称
 
 #构建镜像
-docker build -t ${IMG_FULL_NAME}
+docker build -t ${IMG_FULL_NAME} .
 
 #推送镜像
 #docker push ${IMG_FULL_NAME}
