@@ -10,7 +10,6 @@ pipeline{
         }
         stage('Build Image'){
             steps{
-                sh lable: 'image building', script: 'ls -l'
                 sh label: 'image building', script: '/bin/bash java2dockerImage.sh'
             }
         }
