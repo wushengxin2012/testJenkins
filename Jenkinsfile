@@ -5,17 +5,18 @@ pipeline{
         //其它情况，如使用多个仓库一些构建的，这种就需要额外添加拉取代码的stage了。
         stage('Build Artifact') {
             steps{
-                sh label:'maven building', script: 'mvn clean package -DskipTests'
+                sh label: 'maven building', script: 'mvn clean package -DskipTests'
             }
         }
         stage('Build Image'){
             steps{
-                sh label:'image building', script: '/bin/bash java2dockerImage.sh'
+                sh lable: 'image building', script: 'ls -l'
+                sh label: 'image building', script: '/bin/bash java2dockerImage.sh'
             }
         }
         stage('Deploy k8s'){
             steps{
-                sh label:'deploy image to k8s', script: '/bin/bash dockerImage2Kube.sh'
+                sh label: 'deploy image to k8s', script: '/bin/bash dockerImage2Kube.sh'
             }
         }
     }
