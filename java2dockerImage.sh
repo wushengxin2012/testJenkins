@@ -16,7 +16,7 @@ docker build -t ${IMG_FULL_NAME} .
 #docker push ${IMG_FULL_NAME}
 
 #加载到minikube中
-minikube image load ${IMG_FULL_NAME}
+#minikube image load ${IMG_FULL_NAME}
 
 #删除本地镜像
 #docker rmi ${IMG_FULL_NAME}

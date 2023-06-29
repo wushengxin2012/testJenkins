@@ -23,4 +23,6 @@ FILE_NAME="deploy.yaml"
 
 #远程执行部署命令
 #ssh ${SSH_USER}@${SSH_IP} "kubectl apply -f ${FILE_NAME}"
-kubectl apply -f ${FILE_NAME}
+
+
+#kubectl apply -f ${FILE_NAME}
