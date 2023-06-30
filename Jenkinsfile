@@ -19,29 +19,20 @@ pipeline {
             command:
             - cat
             tty: true
-          hostNetwork: true
         '''
       retries 2
     }
   } 
   stages {
-    stage("runner in default container"){
-      steps {
-        sh "pwd"
-        sh "ls"
-        //sh "echo The default container is $POD_CONTAINER"
-      }
-    }
-  
-    stage("runner in a specify container"){
+    stage("构建Java包"){
       steps {
         container('maven'){
-          sh "echo The container is $POD_CONTAINER"
-          sh "pwd"
-          sh "ls"
+          sh "echo Now In Container: $POD_CONTAINER"
+		  sh label: 'maven building', script: 'mvn clean package -DskipTests'
+		  sh label: 'image building', script: '/bin/bash java2dockerImage.sh'
         }
         container('busybox'){
-          sh "echo The container is $POD_CONTAINER"
+          sh "echo Now In Container: $POD_CONTAINER"
           sh "pwd"
           sh "ls"
         }
