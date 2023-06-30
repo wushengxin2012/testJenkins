@@ -36,10 +36,14 @@ pipeline {
     stage("runner in a specify container"){
       steps {
         container('maven'){
-          sh "echo The default container is $POD_CONTAINER"
+          sh "echo The container is $POD_CONTAINER"
+          sh "pwd"
+          sh "ls"
         }
         container('busybox'){
-          sh "echo The default container is $POD_CONTAINER"
+          sh "echo The container is $POD_CONTAINER"
+          sh "pwd"
+          sh "ls"
         }
       }
     }
