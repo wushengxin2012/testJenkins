@@ -19,7 +19,7 @@ pipeline {
             command:
             - cat
             tty: true
-		  hostNetwork: true
+          hostNetwork: true
         '''
       retries 2
     }
@@ -27,8 +27,8 @@ pipeline {
   stages {
     stage("runner in default container"){
       steps {
-	    sh "pwd"
-	    sh "ls"
+        sh "pwd"
+        sh "ls"
         //sh "echo The default container is $POD_CONTAINER"
       }
     }
