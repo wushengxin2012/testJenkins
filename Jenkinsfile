@@ -9,11 +9,18 @@ pipeline {
             some-label: some-label-value
         spec:
           containers:
+		  - name: maven
+            image: 192.168.0.104:5000/maven:v0.1
+            command:
+            - cat
+            tty: true
           - name: busybox
             image: busybox
             command:
             - cat
             tty: true
+          imagePullSecrets:
+          - name: regs
         '''
       retries 2
     }
@@ -21,11 +28,11 @@ pipeline {
   stages {
     stage("构建Java包"){
       steps {
-        //container('maven'){
-          //sh "echo Now In Container: $POD_CONTAINER"
-		  //sh label: 'maven building', script: 'mvn clean package -DskipTests'
-		  //sh label: 'image building', script: '/bin/bash java2dockerImage.sh'
-        //}
+        container('maven'){
+          sh "echo Now In Container: $POD_CONTAINER"
+		  sh label: 'maven building', script: 'mvn clean package -DskipTests'
+		  sh label: 'image building', script: '/bin/bash java2dockerImage.sh'
+        }
         container('busybox'){
           sh "echo Now In Container: $POD_CONTAINER"
           sh "pwd"
