@@ -10,7 +10,7 @@ pipeline {
         spec:
           containers:
           - name: maven
-            image: 192.168.0.104:5000/maven:v0.1
+            image: 192.168.0.104:5000/maven-aliyun:v0.1
             command:
             - cat
             tty: true
@@ -19,8 +19,6 @@ pipeline {
             command:
             - cat
             tty: true
-          imagePullSecrets:
-          - name: regs
         '''
       retries 2
     }
