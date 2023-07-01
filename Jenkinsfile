@@ -19,6 +19,7 @@ pipeline {
             command:
             - cat
             tty: true
+          hostNetwork: true
         '''
       retries 2
     }
