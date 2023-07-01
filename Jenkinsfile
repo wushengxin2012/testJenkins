@@ -9,7 +9,7 @@ pipeline {
             some-label: some-label-value
         spec:
           containers:
-		  - name: maven
+          - name: maven
             image: 192.168.0.104:5000/maven:v0.1
             command:
             - cat
@@ -30,14 +30,14 @@ pipeline {
       steps {
         container('maven'){
           sh "echo Now In Container: $POD_CONTAINER"
-		  sh label: 'maven building', script: 'mvn clean package -DskipTests'
-		  sh label: 'image building', script: '/bin/bash java2dockerImage.sh'
+          sh label: 'maven building', script: 'mvn clean package -DskipTests'
+          sh label: 'image building', script: '/bin/bash java2dockerImage.sh'
         }
         container('busybox'){
           sh "echo Now In Container: $POD_CONTAINER"
           sh "pwd"
           sh "ls"
-		  sh "ping -c 5 192.168.0.104"
+          sh "ping -c 5 192.168.0.104"
         }
       }
     }
