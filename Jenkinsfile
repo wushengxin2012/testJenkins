@@ -19,8 +19,6 @@ pipeline {
             command:
             - cat
             tty: true
-          imagePullSecrets:
-          - name: regs
         '''
       retries 2
     }
