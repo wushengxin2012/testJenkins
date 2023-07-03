@@ -30,7 +30,7 @@ pipeline {
           sh "echo =================Container-Name: $POD_CONTAINER======================"
           //sh label: 'maven building', script: 'mvn clean package -DskipTests'
           sh "hostname"
-		  sh label: 'image building', script: '/bin/bash java2dockerImage.sh'
+		  //sh label: 'image building', script: '/bin/bash java2dockerImage.sh'
         }
 
         sh "hostname"
