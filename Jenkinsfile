@@ -19,13 +19,6 @@ pipeline {
             command:
             - cat
             tty: true
-          - name: kaniko
-            image: 192.168.0.104:5000/kaniko-project/executor:latest
-            args:
-              - "--dockerfile=./Dockerfile"
-              - "--context=dir://./"
-              - "--destination=192.168.0.104:5000/demo:v0.1"
-            tty: true
         '''
       retries 2
     }
@@ -37,11 +30,6 @@ pipeline {
           sh "=================Container: $POD_CONTAINER======================"
           //sh label: 'maven building', script: 'mvn clean package -DskipTests'
           sh label: 'image building', script: '/bin/bash java2dockerImage.sh'
-        }
-        // 打包镜像
-        container('kaniko'){
-          sh "=================Container: $POD_CONTAINER======================"
-          sh "ls"
         }
         container('busybox'){
           sh "=================Container: $POD_CONTAINER======================"
