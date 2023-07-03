@@ -27,12 +27,12 @@ pipeline {
     stage("构建Java包"){
       steps {
         container('maven'){
-          sh "=================Container: $POD_CONTAINER======================"
+          sh "=================Container-Name: $POD_CONTAINER======================"
           //sh label: 'maven building', script: 'mvn clean package -DskipTests'
           sh label: 'image building', script: '/bin/bash java2dockerImage.sh'
         }
         container('busybox'){
-          sh "=================Container: $POD_CONTAINER======================"
+          sh "=================Container-Name: $POD_CONTAINER======================"
           sh "pwd"
           sh "ls"
           sh "ping -c 5 192.168.0.104"
