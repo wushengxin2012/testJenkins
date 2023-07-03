@@ -19,6 +19,11 @@ pipeline {
             command:
             - cat
             tty: true
+          - name: kaniko
+            image: gcr.io/kaniko-project/executor:latest
+            command:
+            - cat
+            tty: true
         '''
       retries 2
     }
@@ -27,12 +32,17 @@ pipeline {
     stage("构建Java包"){
       steps {
         container('maven'){
-          sh "echo Now In Container: $POD_CONTAINER"
-          sh label: 'maven building', script: 'mvn clean package -DskipTests'
+          sh "=================Container: $POD_CONTAINER======================"
+          //sh label: 'maven building', script: 'mvn clean package -DskipTests'
           sh label: 'image building', script: '/bin/bash java2dockerImage.sh'
         }
+        // 打包镜像
+        container('kaniko'){
+          sh "=================Container: $POD_CONTAINER======================"
+          sh "ls"
+        }
         container('busybox'){
-          sh "echo Now In Container: $POD_CONTAINER"
+          sh "=================Container: $POD_CONTAINER======================"
           sh "pwd"
           sh "ls"
           sh "ping -c 5 192.168.0.104"
