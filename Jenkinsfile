@@ -32,6 +32,10 @@ pipeline {
           sh "hostname"
 		  sh label: 'image building', script: '/bin/bash java2dockerImage.sh'
         }
+
+        sh "hostname"
+		sh label: 'image building', script: '/bin/bash java2dockerImage.sh'
+
         container('busybox'){
           sh "echo =================Container-Name: $POD_CONTAINER======================"
           sh "pwd"
