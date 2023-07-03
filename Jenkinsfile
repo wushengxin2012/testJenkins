@@ -20,9 +20,11 @@ pipeline {
             - cat
             tty: true
           - name: kaniko
-            image: gcr.io/kaniko-project/executor:latest
-            command:
-            - cat
+            image: 192.168.0.104:5000/kaniko-project/executor:latest
+            args:
+              - "--dockerfile=./Dockerfile"
+              - "--context=dir://./"
+              - "--destination=192.168.0.104:5000/demo:v0.1"
             tty: true
         '''
       retries 2
