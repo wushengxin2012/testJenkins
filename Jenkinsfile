@@ -33,15 +33,17 @@ pipeline {
       steps {
         container('maven'){
           sh "echo =================Container-Name: $POD_CONTAINER======================"
-          sh label: 'maven building', script: 'mvn clean package -DskipTests'
+          //sh label: 'maven building', script: 'mvn clean package -DskipTests'
         }
         container('docker'){
-          sh label: 'image building', script: '/bin/sh java2dockerImage.sh'
+          sh "echo =================Container-Name: $POD_CONTAINER======================"
+          //sh label: 'image building', script: '/bin/sh java2dockerImage.sh'
         }
         container('kubectl'){
           sh "echo =================Container-Name: $POD_CONTAINER======================"
-          sh label: 'deploy image to k8s', script: '/bin/sh dockerImage2Kube.sh'
+          //sh label: 'deploy image to k8s', script: '/bin/sh dockerImage2Kube.sh'
         }
+		sh "kubectl version"
       }
     }
  
