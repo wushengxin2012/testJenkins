@@ -17,7 +17,7 @@ spec:                 #期待运行状态
     spec:             #pod容器期望的状态
       containers:
         - name: test-demo
-          image: {{IMAGE_NAME}}
+          image: 192.168.0.104:5000/{{IMAGE_NAME}}
           imagePullPolicy: Never
           env:
             - name: JVM_OPTS
