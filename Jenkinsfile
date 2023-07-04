@@ -45,8 +45,7 @@ pipeline {
                   serverUrl: 'https://192.168.0.101:6443',
                   namespace: 'jenkins-app'
                   ]){
-          sh 'kubectl get pods'
-          //sh label: 'deploy image to k8s', script: '/bin/sh dockerImage2Kube.sh'
+          sh label: 'deploy image to k8s', script: '/bin/sh dockerImage2Kube.sh'
         }
         }
       }
