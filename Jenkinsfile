@@ -39,7 +39,7 @@ pipeline {
         container('docker'){
           sh "mkdir target"
           sh "echo sh>target/124.jar"
-          sh label: 'image building', script: '/bin/bash java2dockerImage.sh'
+          sh label: 'image building', script: '/bin/sh java2dockerImage.sh'
         }
         container('busybox'){
           sh "echo =================Container-Name: $POD_CONTAINER======================"
