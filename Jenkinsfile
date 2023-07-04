@@ -20,7 +20,7 @@ pipeline {
             - cat
             tty: true
           - name: kubectl
-            image: 192.168.0.104:5000/kubectl:v0.2
+            image: 192.168.0.104:5000/kubectl:v0.4
             command:
             - cat
             tty: true
