@@ -22,7 +22,7 @@ pipeline {
           - name: kubectl
             image: 192.168.0.104:5000/kubectl:v0.2
             command:
-            - ls
+            - cat
             tty: true
         '''
       retries 2
@@ -41,7 +41,7 @@ pipeline {
         }
         container('kubectl'){
           sh "echo =================Container-Name: $POD_CONTAINER======================"
-          sh 'kubectl version'
+          sh "kubectl version"
           //withKubeConfig([credentialsId: 'jenkins-admin',
                     //serverUrl: 'https://192.168.0.101:6443',
                     //namespace: 'jenkins-app'
