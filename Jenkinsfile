@@ -14,6 +14,11 @@ pipeline {
             command:
             - cat
             tty: true
+          - name: docker
+            image: 192.168.0.104:5000/docker:latest
+            command:
+            - cat
+            tty: true
           - name: busybox
             image: busybox
             command:
@@ -29,13 +34,13 @@ pipeline {
         container('maven'){
           sh "echo =================Container-Name: $POD_CONTAINER======================"
           //sh label: 'maven building', script: 'mvn clean package -DskipTests'
-          sh "hostname"
 		  //sh label: 'image building', script: '/bin/bash java2dockerImage.sh'
         }
-
-        sh "hostname"
-		sh label: 'image building', script: '/bin/bash java2dockerImage.sh'
-
+        container('docker'){
+          sh "mkdir target"
+          sh "echo sh>target/124.jar"
+          sh label: 'image building', script: '/bin/bash java2dockerImage.sh'
+        }
         container('busybox'){
           sh "echo =================Container-Name: $POD_CONTAINER======================"
           sh "pwd"
