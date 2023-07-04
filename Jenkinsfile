@@ -19,8 +19,8 @@ pipeline {
             command:
             - cat
             tty: true
-          - name: busybox
-            image: busybox
+          - name: kubectl
+            image: bitnami/kubectl
             command:
             - cat
             tty: true
@@ -34,12 +34,11 @@ pipeline {
         container('maven'){
           sh "echo =================Container-Name: $POD_CONTAINER======================"
           sh label: 'maven building', script: 'mvn clean package -DskipTests'
-		  sh label: 'image building', script: '/bin/bash java2dockerImage.sh'
         }
         container('docker'){
           sh label: 'image building', script: '/bin/sh java2dockerImage.sh'
         }
-        container('busybox'){
+        container('kubectl'){
           sh "echo =================Container-Name: $POD_CONTAINER======================"
           sh label: 'deploy image to k8s', script: '/bin/sh dockerImage2Kube.sh'
         }
