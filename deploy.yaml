@@ -2,7 +2,7 @@ apiVersion: apps/v1   #api版本
 kind: Deployment      #对象类型
 metadata:             #元信息标识
   name: test-demo
-  namespace: default
+  namespace: jenkins-app
   labels:             #自定义Deployment绑定的标签
     app: test-demo
 spec:                 #期待运行状态
@@ -30,7 +30,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: test-demo-svc
-  namespace: default
+  namespace: jenkins-app
   labels:
     service: test-demo-svc
 spec:
