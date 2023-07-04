@@ -41,15 +41,14 @@ pipeline {
         }
         container('kubectl'){
           sh "echo =================Container-Name: $POD_CONTAINER======================"
-          sh "kubectl version"
-        }
-        //withKubeConfig([credentialsId: 'jenkins-admin',
-                  //serverUrl: 'https://192.168.0.101:6443',
-                  //namespace: 'jenkins-app'
-                  //]){
-          //sh 'kubectl get pods'
+          withKubeConfig([credentialsId: 'jenkins-admin',
+                  serverUrl: 'https://192.168.0.101:6443',
+                  namespace: 'jenkins-app'
+                  ]){
+          sh 'kubectl get pods'
           //sh label: 'deploy image to k8s', script: '/bin/sh dockerImage2Kube.sh'
-        //}
+        }
+        }
       }
     }
  
