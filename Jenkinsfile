@@ -33,11 +33,11 @@ pipeline {
       steps {
         container('maven'){
           sh "echo =================Container-Name: $POD_CONTAINER======================"
-          //sh label: 'maven building', script: 'mvn clean package -DskipTests'
+          sh label: 'maven building', script: 'mvn clean package -DskipTests'
         }
         container('docker'){
           sh "echo =================Container-Name: $POD_CONTAINER======================"
-          //sh label: 'image building', script: '/bin/sh java2dockerImage.sh'
+          sh label: 'image building', script: '/bin/sh java2dockerImage.sh'
         }
         container('kubectl'){
           sh "echo =================Container-Name: $POD_CONTAINER======================"
@@ -45,8 +45,8 @@ pipeline {
                   serverUrl: 'https://192.168.0.101:6443',
                   namespace: 'jenkins-app'
                   ]){
-          sh label: 'deploy image to k8s', script: '/bin/sh dockerImage2Kube.sh'
-        }
+            sh label: 'deploy image to k8s', script: '/bin/sh dockerImage2Kube.sh'
+          }
         }
       }
     }
