@@ -20,7 +20,7 @@ pipeline {
             - cat
             tty: true
           - name: kubectl
-            image: bitnami/kubectl
+            image: 192.168.0.104:5000/bitnami/kubectl:v0.1
             command:
             - cat
             tty: true
@@ -40,14 +40,15 @@ pipeline {
           //sh label: 'image building', script: '/bin/sh java2dockerImage.sh'
         }
         container('kubectl'){
-          sh "echo =================Container-Name: $POD_CONTAINER======================"
+          //sh "echo =================Container-Name: $POD_CONTAINER======================"
 
-          withKubeConfig([credentialsId: 'jenkins-admin',
-                    serverUrl: 'https://192.168.0.101:6443',
-                    namespace: 'jenkins-app'
-                    ]){
-            sh 'kubectl get pods'
+          //withKubeConfig([credentialsId: 'jenkins-admin',
+                    //serverUrl: 'https://192.168.0.101:6443',
+                    //namespace: 'jenkins-app'
+                    //]){
+            //sh 'kubectl get pods'
             //sh label: 'deploy image to k8s', script: '/bin/sh dockerImage2Kube.sh'
+            sh 'kubectl version'
           }
         }
       }
