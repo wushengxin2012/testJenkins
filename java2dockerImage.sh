@@ -10,10 +10,10 @@ IMG_TAG=`date "+%Y%M%d_%H%M"`      #镜像标签，如 20201223_1351
 IMG_FULL_NAME="${IMG_REGISTRY}/${IMG_NAME}:${IMG_TAG}" #镜像上传与拉取的名称
 
 #构建镜像 -- 由外部的kaniko构建
-docker build -t ${IMG_FULL_NAME} .
+docker -H  192.168.0.104:2375 build -t ${IMG_FULL_NAME} .
 
 #推送镜像
-docker push ${IMG_FULL_NAME}
+docker -H  192.168.0.104:2375 push ${IMG_FULL_NAME}
 
 #加载到minikube中
 #minikube image load ${IMG_FULL_NAME}
