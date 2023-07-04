@@ -33,19 +33,15 @@ pipeline {
       steps {
         container('maven'){
           sh "echo =================Container-Name: $POD_CONTAINER======================"
-          //sh label: 'maven building', script: 'mvn clean package -DskipTests'
-		  //sh label: 'image building', script: '/bin/bash java2dockerImage.sh'
+          sh label: 'maven building', script: 'mvn clean package -DskipTests'
+		  sh label: 'image building', script: '/bin/bash java2dockerImage.sh'
         }
         container('docker'){
-          sh "mkdir target"
-          sh "echo sh>target/124.jar"
           sh label: 'image building', script: '/bin/sh java2dockerImage.sh'
         }
         container('busybox'){
           sh "echo =================Container-Name: $POD_CONTAINER======================"
-          sh "pwd"
-          sh "ls"
-          sh "ping -c 5 192.168.0.104"
+          sh label: 'deploy image to k8s', script: '/bin/sh dockerImage2Kube.sh'
         }
       }
     }

@@ -25,4 +25,4 @@ FILE_NAME="deploy.yaml"
 #ssh ${SSH_USER}@${SSH_IP} "kubectl apply -f ${FILE_NAME}"
 
 
-#kubectl apply -f ${FILE_NAME}
+kubectl apply -f ${FILE_NAME}
