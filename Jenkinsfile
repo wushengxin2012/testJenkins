@@ -22,7 +22,7 @@ pipeline {
           - name: kubectl
             image: 192.168.0.104:5000/kubectl:v0.2
             command:
-            - cat
+            - ls
             tty: true
         '''
       retries 2
