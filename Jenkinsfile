@@ -19,11 +19,6 @@ pipeline {
             command:
             - cat
             tty: true
-          - name: kubectl
-            image: 192.168.0.104:5000/kubectl:v0.4
-            command:
-            - cat
-            tty: true
         '''
       retries 2
     }
@@ -39,16 +34,16 @@ pipeline {
           sh "echo =================Container-Name: $POD_CONTAINER======================"
           //sh label: 'image building', script: '/bin/sh java2dockerImage.sh'
         }
-        container('kubectl'){
-          sh "echo =================Container-Name: $POD_CONTAINER======================"
-          sh "kubectl version"
-          //withKubeConfig([credentialsId: 'jenkins-admin',
-                    //serverUrl: 'https://192.168.0.101:6443',
-                    //namespace: 'jenkins-app'
-                    //]){
-            //sh 'kubectl get pods'
-            //sh label: 'deploy image to k8s', script: '/bin/sh dockerImage2Kube.sh'
-          //}
+        //container('kubectl'){
+          //sh "echo =================Container-Name: $POD_CONTAINER======================"
+          //sh "kubectl version"
+        //}
+        withKubeConfig([credentialsId: 'jenkins-admin',
+                  serverUrl: 'https://192.168.0.101:6443',
+                  namespace: 'jenkins-app'
+                  ]){
+          sh 'kubectl get pods'
+          //sh label: 'deploy image to k8s', script: '/bin/sh dockerImage2Kube.sh'
         }
       }
     }
