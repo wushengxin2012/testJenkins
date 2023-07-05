@@ -17,8 +17,7 @@ spec:                 #期待运行状态
     spec:             #pod容器期望的状态
       containers:
         - name: test-demo
-          image: 192.168.0.104:5000/{{IMAGE_NAME}}
-          imagePullPolicy: Never
+          image: {{IMAGE_NAME}}
           env:
             - name: JVM_OPTS
               value: "-Xms128m -Xmx256m"
